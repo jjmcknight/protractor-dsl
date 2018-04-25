@@ -1,0 +1,29 @@
+{
+  "name": "protractor-dsl",
+  "version": "1.0.0",
+  "description": "Domain specific language wrapper of Protractor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jjmcknight81/protractor-dsl.git"
+  },
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
+  "scripts": {
+    "build": "./node_modules/.bin/tsc",
+    "prepare": "npm run build",
+    "watch": "npm run build -- --watch",
+    "clean": "rimraf build"
+  },
+  "author": {
+    "name": "Jeff McKnight",
+    "email": "jmcknight@illumina.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "protractor": "^5.3.1",
+    "typescript": "^2.8.3"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2"
+  }
+}
