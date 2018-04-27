@@ -25,13 +25,14 @@ export abstract class Page {
 /**
  *
  */
-export async function go<T extends Page>(pageOrUrl: {new(): T} | string): Promise<{}> {
+export async function go<T extends Page>(pageOrUrl: {new(): T} | string, url?: URL): Promise<void> {
 
     if (typeof(pageOrUrl) === "string") {
-        browser.get(pageOrUrl);
-        return null;
+        await browser.get(pageOrUrl);
+    } else if (url) {
+        await browser.get(url.toString());
     } else {
-        return await browser.get(pageOrUrl.prototype.constructor.url);
+        await browser.get(pageOrUrl.prototype.constructor.url);
     }
 }
 
@@ -55,15 +56,15 @@ export async function isAt<T extends Page>(page: {new(): T}): Promise<boolean> {
 /**
  *
  */
-export async function to<T extends Page>(page: {new(): T}): Promise<T> {
-    await go(page);
+export async function to<T extends Page>(page: {new(): T}, url?: URL): Promise<T> {
+    await go(page, url);
     return await at(page);
 }
 
 /**
  *
  */
-export async function via<T extends Page>(page: {new(): T}): Promise<T> {
-    await go(page);
+export async function via<T extends Page>(page: {new(): T}, url?: URL): Promise<T> {
+    await go(page, url);
     return new page();
 }
